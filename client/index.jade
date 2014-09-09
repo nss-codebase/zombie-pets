@@ -16,18 +16,50 @@ html(ng-app='zombie-pets', lang='en')
       .row
         .col-xs-3
           h4 Create Weapon
-          form(role='form', novalidate)
+          button.btn.btn-success(ng-click='toggleWeapon()') Toggle Form
+          form(role='form', novalidate, ng-hide='hideWeapon', name='weaponForm')
             .form-group
               label(for='name') Name
-              input.form-control#name(type='text', name='name', autofocus)
+              input.form-control#name(ng-minlength='3', ng-maxlength='10', required, ng-model='weapon.name', type='text', name='name', autofocus)
             .form-group
               label(for='photo') Photo
-              input.form-control#photo(type='text', name='photo')
+              input.form-control#photo(ng-pattern='/^http/', required, ng-model='weapon.photo', type='text', name='photo')
             .form-group
               label(for='damage') Damage
-              input.form-control#damage(type='number', name='damage')
-            button.btn.btn-primary(type='submit') Add Weapon
-        .col-xs-9
+              input.form-control#damage(required, ng-model='weapon.damage', type='number', name='damage')
+            button.btn.btn-primary(type='submit', ng-show='weaponForm.$valid', ng-click='addWeapon()') Add Weapon
+        .col-xs-3
+          h4 Create Pet
+          button.btn.btn-success(ng-click='togglePet()') Toggle Form
+          form(role='form', novalidate, ng-hide='hidePet', name='petForm')
+            .form-group
+              label(for='name') Name
+              input.form-control#petname(required, ng-model='pet.name', type='text', name='name')
+            .form-group
+              label(for='photo') Photo
+              input.form-control#petphoto(ng-pattern='/^http/', required, ng-model='pet.photo', type='text', name='photo')
+            .form-group
+              label Health
+              input.form-control(type='number', readonly, ng-model='pet.health')
+            .form-group
+              label(for='weapon')
+              select(name='weapon', ng-model='pet.weapon')
+                option(ng-repeat='w in weapons', value='{{$index}}') {{w.name}}
+
+            button.btn.btn-primary(type='submit', ng-show='petForm.$valid', ng-click='addPet()') Add Pet
+        .col-xs-6
+      .row
+        .col-xs-12
+          .weapon(ng-repeat='w in weapons')
+            .image(style='background-image:url("{{w.photo}}");')
+            h6 Name: {{w.name}}
+            h6 Damage: {{w.damage}}
+      .row
+        .col-xs-12
+          pre {{weapon | json}}
+          pre {{weapons | json}}
+          pre {{pet | json}}
+          pre {{pets | json}}
 
     script(src='/vendor/angular/angular.js')
     script(src='/vendor/jquery/dist/jquery.js')
