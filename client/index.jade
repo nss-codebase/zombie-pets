@@ -14,6 +14,22 @@ html(ng-app='zombie-pets', lang='en')
         .col-xs-12
           h1 {{title}}
       .row
+        .col-xs-12
+          #cage(ng-show='player1 && player2')
+            .pet
+              .image(style='background-image:url("{{player1.photo}}");')
+              h6 Name: {{player1.name}}
+              h6 Health: {{player1.health}}
+              h6 Weapon: {{player1.weapon.name}}
+              h6 Damage: {{player1.weapon.damage}}
+            .pet
+              .image(style='background-image:url("{{player2.photo}}");')
+              h6 Name: {{player2.name}}
+              h6 Health: {{player2.health}}
+              h6 Weapon: {{player2.weapon.name}}
+              h6 Damage: {{player2.weapon.damage}}
+            button.btn.btn-danger.btn-lg FIGHT!!!
+      .row
         .col-xs-3
           h4 Create Weapon
           button.btn.btn-success(ng-click='toggleWeapon()') Toggle Form
@@ -45,7 +61,6 @@ html(ng-app='zombie-pets', lang='en')
               label(for='weapon')
               select(name='weapon', ng-model='pet.weapon')
                 option(ng-repeat='w in weapons', value='{{$index}}') {{w.name}}
-
             button.btn.btn-primary(type='submit', ng-show='petForm.$valid', ng-click='addPet()') Add Pet
         .col-xs-6
       .row
@@ -56,10 +71,21 @@ html(ng-app='zombie-pets', lang='en')
             h6 Damage: {{w.damage}}
       .row
         .col-xs-12
+          .pet(ng-repeat='p in pets')
+            .image(style='background-image:url("{{p.photo}}");')
+            h6 Name: {{p.name}}
+            h6 Health: {{p.health}}
+            h6 Weapon: {{p.weapon.name}}
+            button.btn.btn-danger(ng-click='setPlayer(1)') 1
+            button.btn.btn-danger(ng-click='setPlayer(2)') 2
+      .row
+        .col-xs-12
           pre {{weapon | json}}
           pre {{weapons | json}}
           pre {{pet | json}}
           pre {{pets | json}}
+          pre {{player1 | json}}
+          pre {{player2 | json}}
 
     script(src='/vendor/angular/angular.js')
     script(src='/vendor/jquery/dist/jquery.js')

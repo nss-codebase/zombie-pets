@@ -10,6 +10,9 @@
     $scope.pet = {health:100};
     $scope.pets = [];
 
+    $scope.player1 = null;
+    $scope.player2 = null;
+
     $scope.addWeapon = function(){
       $scope.weapons.push($scope.weapon);
       $scope.weapon = {};
@@ -21,6 +24,10 @@
       $scope.pet.weapon = $scope.weapons[index];
       $scope.pets.push($scope.pet);
       $scope.pet = {health:100};
+    };
+
+    $scope.setPlayer = function(num){
+      $scope['player' + num] = this.p;
     };
 
     $scope.toggleWeapon = function(){
