@@ -1,11 +1,11 @@
 {
   "name": "mean-template",
   "version": "0.0.0",
-  "homepage": "https://github.com/chyld/mean-template",
+  "homepage": "https://github.com/chyld/zombie-pets",
   "authors": [
     "Chyld Medford <chyld.medford@gmail.com>"
   ],
-  "description": "The MEAN Template",
+  "description": "Angular Zombie Pets",
   "license": "MIT",
   "dependencies": {
     "angular": "1.3.0-rc.0",
