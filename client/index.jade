@@ -19,16 +19,22 @@ html(ng-app='zombie-pets', lang='en')
             .pet
               .image(style='background-image:url("{{player1.photo}}");')
               h6 Name: {{player1.name}}
+              .health
+                .bar(ng-style='{width:player1.health + "%", "background-color":(player1.health < 10 ? "red" : "green")}')
               h6 Health: {{player1.health}}
               h6 Weapon: {{player1.weapon.name}}
               h6 Damage: {{player1.weapon.damage}}
+              h6 Zombie: {{player1.isZombie}}
             .pet
               .image(style='background-image:url("{{player2.photo}}");')
               h6 Name: {{player2.name}}
+              .health
+                .bar(ng-style='{width:player2.health + "%", "background-color":(player2.health < 10 ? "red" : "green")}')
               h6 Health: {{player2.health}}
               h6 Weapon: {{player2.weapon.name}}
               h6 Damage: {{player2.weapon.damage}}
-            button.btn.btn-danger.btn-lg FIGHT!!!
+              h6 Zombie: {{player2.isZombie}}
+            button.btn.btn-danger(ng-click='fight()') FIGHT!!!
       .row
         .col-xs-3
           h4 Create Weapon
